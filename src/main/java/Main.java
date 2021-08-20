@@ -9,8 +9,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -21,9 +20,10 @@ public class Main {
 
         CloseableHttpClient httpClient = HttpClientBuilder.create()
                 .setUserAgent("The Cat-Scanner Service")
-                .setDefaultRequestConfig(RequestConfig.custom()
-                        .setConnectTimeout(5000)
-                        .setSocketTimeout(30000)
+                .setDefaultRequestConfig(
+                        RequestConfig.custom()
+                        .setConnectTimeout(5_000)
+                        .setSocketTimeout(30_000)
                         .setRedirectsEnabled(false)
                         .build()
                 ).build();
@@ -39,6 +39,7 @@ public class Main {
         System.out.println();
         catFacts.stream()
                 .filter(x -> x.getUpvotes() != 0)
+                .sorted(Comparator.comparing(CatRec::getUpvotes).reversed())
                 .forEach(System.out::println);
     }
 }

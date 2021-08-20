@@ -1,11 +1,11 @@
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CatRec {
-    private String id;
-    private String fact;
-    private String type;
-    private String publisher;
-    private int upvotes;
+    private final String id;
+    private final String fact;
+    private final String type;
+    private final String publisher;
+    private final int upvotes;
 
     public CatRec(
             @JsonProperty("id") String id,
@@ -27,22 +27,6 @@ public class CatRec {
                 "%s%n" +
                 "(голосов: %d)%n")
                 .formatted(id, type, publisher, fact, upvotes);
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getFact() {
-        return fact;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getPublisher() {
-        return publisher;
     }
 
     public int getUpvotes() {
